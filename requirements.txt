@@ -2,6 +2,6 @@ numba
 faiss-cpu
 #faiss-gpu
 httpx[http2]
-googletrans
+langdetect
 sentence-splitter
 sentence-transformers
