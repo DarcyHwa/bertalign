@@ -13,16 +13,25 @@ def clean_text(text):
             clean_text.append(line)
     return "\n".join(clean_text)
     
-def detect_lang(text):
-    translator = Translator(service_urls=[
-      'translate.google.com.hk',
-    ])
-    max_len = 200
-    chunk = text[0 : min(max_len, len(text))]
-    lang = translator.detect(chunk).lang
-    if lang.startswith('zh'):
-        lang = 'zh'
+# utils.py
+def detect_lang(text: str) -> str:
+    # 取前 200 个字符做判别
+    chunk = text[:200] if text else ""
+    if not chunk.strip():
+        return "en"  # 保底
+
+    # 先用本地判别（同步、无网络）
+    try:
+        from langdetect import detect
+        lang = detect(chunk)  # 可能返回 'en', 'zh-cn', 'fr' 等
+    except Exception:
+        lang = "en"
+
+    # 项目里原本把所有中文映射成 'zh'
+    if lang.startswith("zh"):
+        lang = "zh"
     return lang
+
 
 def split_sents(text, lang):
     if lang in LANG.SPLITTER:
