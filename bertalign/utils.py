@@ -1,18 +1,25 @@
 import re
-from googletrans import Translator
+#from googletrans import Translator
 from sentence_splitter import SentenceSplitter
 
-def clean_text(text):
-    clean_text = []
-    text = text.strip()
+# def clean_text(text):
+#     clean_text = []
+#     text = text.strip()
+#     lines = text.splitlines()
+#     for line in lines:
+#         line = line.strip()
+#         if line:
+#             line = re.sub('\s+', ' ', line)
+#             clean_text.append(line)
+#     return "\n".join(clean_text)
+
+def clean_text(text: str) -> str:
+    # 逐行清洗；注意用原生字符串 r'\s+' 避免 \s 转义警告
     lines = text.splitlines()
-    for line in lines:
-        line = line.strip()
-        if line:
-            line = re.sub('\s+', ' ', line)
-            clean_text.append(line)
-    return "\n".join(clean_text)
-    
+    lines = [re.sub(r'\s+', ' ', line.strip()) for line in lines]
+    return '\n'.join(lines)
+
+
 # utils.py
 def detect_lang(text: str) -> str:
     # 取前 200 个字符做判别
