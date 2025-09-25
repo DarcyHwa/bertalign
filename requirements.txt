@@ -1,7 +1,7 @@
-numba==0.60.0
-faiss-cpu==1.10
-#faiss-gpu==1.7.2
-httpx[http2]==0.28.1
-googletrans==4.0.0rc1
-sentence-splitter==1.4
-sentence-transformers==3.2.1
+numba
+faiss-cpu
+#faiss-gpu
+httpx[http2]
+googletrans
+sentence-splitter
+sentence-transformers
